@@ -1,6 +1,6 @@
-# StepFi Smart Contracts - Development Roadmap
+# Lendify Smart Contracts - Development Roadmap
 
-This document provides a comprehensive view of the development status for all smart contract issues across the StepFi platform.
+This document provides a comprehensive view of the development status for all smart contract issues across the Lendify platform.
 
 **Legend:**
 - ✅ **Completed** — Fully implemented and tested
@@ -528,5 +528,5 @@ Comprehensive test coverage for all contracts.
 ---
 
 **Last Updated:** 2026-03-27
-**Document Owner:** StepFi Development Team
+**Document Owner:** Lendify Development Team
 **Related Docs:** [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) | [ARCHITECTURE.md](ARCHITECTURE.md) | [CONTRIBUTING.md](CONTRIBUTING.md)

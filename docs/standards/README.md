@@ -1,6 +1,6 @@
 # Standards & Conventions
 
-Code standards, conventions, and best practices for StepFi smart contract development.
+Code standards, conventions, and best practices for Lendify smart contract development.
 
 ## Contents
 

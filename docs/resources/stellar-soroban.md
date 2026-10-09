@@ -314,11 +314,11 @@ stellar contract invoke \
   my_function --arg value
 ```
 
-## StepFi Configuration
+## Lendify Configuration
 
 ### Networks
 
-StepFi uses:
+Lendify uses:
 - **Development**: Testnet
 - **Production**: Mainnet (future)
 

@@ -1,6 +1,6 @@
 # Resources
 
-External resources, tools, and references for StepFi development.
+External resources, tools, and references for Lendify development.
 
 ## Contents
 

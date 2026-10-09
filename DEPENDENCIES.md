@@ -1,4 +1,4 @@
-# Dependencies Audit — StepFi-Contracts
+# Dependencies Audit — Lendify-smart_contracts
 
 Last audited: 2026-05-05
 Auditor: maintainer
@@ -16,7 +16,7 @@ Run tree: `cargo tree --depth=1`
 | 0 vulnerabilities | 0 | 0 | 0 | 2 (unmaintained) |
 
 **Status: Clean ✅**
-No actionable security vulnerabilities. Both warnings are transitive through `soroban-sdk` and cannot be resolved by StepFi — they require Stellar to update the SDK.
+No actionable security vulnerabilities. Both warnings are transitive through `soroban-sdk` and cannot be resolved by Lendify — they require Stellar to update the SDK.
 
 ---
 
@@ -47,7 +47,7 @@ No actionable security vulnerabilities. Both warnings are transitive through `so
 ## Workspace Structure
 
 ```
-StepFi-Contracts (workspace)
+Lendify-smart_contracts (workspace)
 ├── creditline-contract v1.0.0    # Depends on all 4 contracts below
 ├── liquidity-pool-contract v1.0.0
 ├── parameters-contract v1.0.0

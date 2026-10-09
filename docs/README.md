@@ -1,6 +1,6 @@
-# StepFi Contracts Documentation
+# Lendify Contracts Documentation
 
-Comprehensive documentation for StepFi smart contracts on Stellar/Soroban.
+Comprehensive documentation for Lendify smart contracts on Stellar/Soroban.
 
 ## 📚 Documentation Structure
 
@@ -34,7 +34,7 @@ External resources, tools, and references.
 
 ### For New Contributors
 
-1. **Read**: [PROJECT_CONTEXT.md](../PROJECT_CONTEXT.md) - Understand StepFi's vision
+1. **Read**: [PROJECT_CONTEXT.md](../PROJECT_CONTEXT.md) - Understand Lendify's vision
 2. **Setup**: Install Rust and dependencies
    ```bash
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -42,8 +42,8 @@ External resources, tools, and references.
    ```
 3. **Clone**: Get the repository
    ```bash
-   git clone https://github.com/yourusername/StepFi-Contracts.git
-   cd StepFi-Contracts
+   git clone https://github.com/yourusername/Lendify-smart_contracts.git
+   cd Lendify-smart_contracts
    ```
 4. **Verify**: Run tests
    ```bash
@@ -76,7 +76,7 @@ External resources, tools, and references.
 ## 📖 Key Documents
 
 ### Getting Started
-- [PROJECT_CONTEXT.md](../PROJECT_CONTEXT.md) - What is StepFi?
+- [PROJECT_CONTEXT.md](../PROJECT_CONTEXT.md) - What is Lendify?
 - [CONTRIBUTING.md](../CONTRIBUTING.md) - How to contribute
 - [ROADMAP.md](ROADMAP.md) - Development timeline
 
@@ -132,7 +132,7 @@ cargo check
 ## 🏗️ Project Structure
 
 ```
-StepFi-Contracts/
+Lendify-smart_contracts/
 ├── contracts/                          # Smart contracts
 │   ├── reputation-contract/            # ✅ Reputation scoring
 │   ├── creditline-contract/            # ⏳ Loan management
@@ -191,9 +191,9 @@ This project is open source. See LICENSE file for details.
 
 ## 💬 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/StepFi-Contracts/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/StepFi-Contracts/discussions)
-- **Discord**: [Stellar Discord](https://discord.gg/stellar) - mention @StepFi
+- **Issues**: [GitHub Issues](https://github.com/yourusername/Lendify-smart_contracts/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/Lendify-smart_contracts/discussions)
+- **Discord**: [Stellar Discord](https://discord.gg/stellar) - mention @Lendify
 
 ## 🗺️ Navigation
 

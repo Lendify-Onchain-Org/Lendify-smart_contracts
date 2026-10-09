@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Manage on-chain reputation scores (0-100) for users in the StepFi BNPL system. This contract tracks user reputation based on repayment behavior and allows authorized updaters (like the CreditLine contract) to modify scores.
+Manage on-chain reputation scores (0-100) for users in the Lendify BNPL system. This contract tracks user reputation based on repayment behavior and allows authorized updaters (like the CreditLine contract) to modify scores.
 
 ## Overview
 

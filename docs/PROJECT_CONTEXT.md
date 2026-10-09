@@ -1,8 +1,8 @@
 # Project Context
 
-## What is StepFi?
+## What is Lendify?
 
-StepFi is a decentralized "Buy Now, Pay Later" (BNPL) platform built on Stellar blockchain using Soroban smart contracts. It enables users to make purchases by paying a 20% guarantee deposit upfront while receiving the remaining 80% as credit from a community-funded liquidity pool. The system uses on-chain reputation to reward good repayment behavior and penalize defaults.
+Lendify is a decentralized "Buy Now, Pay Later" (BNPL) platform built on Stellar blockchain using Soroban smart contracts. It enables users to make purchases by paying a 20% guarantee deposit upfront while receiving the remaining 80% as credit from a community-funded liquidity pool. The system uses on-chain reputation to reward good repayment behavior and penalize defaults.
 
 ## The Problem
 
@@ -14,7 +14,7 @@ Traditional BNPL and credit systems have several issues:
 4. **High fees**: Centralized platforms charge significant merchant and user fees
 5. **Siloed reputation**: Credit history is locked within individual platforms and not portable
 
-## StepFi's Solution
+## Lendify's Solution
 
 - **Transparent credit system**: All rules encoded in smart contracts on public blockchain
 - **Portable reputation**: On-chain scores owned by users, usable across any dApp
@@ -55,7 +55,7 @@ Traditional BNPL and credit systems have several issues:
 **Transaction**:
 - Laptop costs $500
 - Maria deposits $100 (20% guarantee)
-- StepFi creates $400 loan at 8% APR (based on score 75)
+- Lendify creates $400 loan at 8% APR (based on score 75)
 - Merchant receives $500 from liquidity pool
 - Maria owes $432 over 4 months ($108/month)
 
@@ -103,12 +103,12 @@ Traditional BNPL and credit systems have several issues:
 User reputation is:
 - **On-chain**: Stored in Stellar blockchain state
 - **Owned by user**: Tied to user's Stellar address
-- **Portable**: Any dApp can query StepFi reputation contract
+- **Portable**: Any dApp can query Lendify reputation contract
 - **Verifiable**: All changes recorded as blockchain events
 - **Transparent**: Users see exactly why score changed
 
 **Use cases for portable reputation**:
-- Other DeFi protocols can use StepFi score for lending decisions
+- Other DeFi protocols can use Lendify score for lending decisions
 - DAOs can use reputation for governance weight
 - Future BNPL platforms can leverage existing reputation
 - Credit scoring services can aggregate on-chain behavior

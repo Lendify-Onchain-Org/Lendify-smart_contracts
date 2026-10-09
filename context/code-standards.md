@@ -1,4 +1,4 @@
-# Code Standards — StepFi-Contracts
+# Code Standards — Lendify-smart_contracts
 
 ## Language: Rust + Soroban SDK
 

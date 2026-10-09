@@ -1,8 +1,8 @@
-# StepFi — Product Requirements Document (PRD)
+# Lendify — Product Requirements Document (PRD)
 
 > **Status:** v1.1 — core decisions ratified (§13) · **Date:** 2026-09-10 · **Last updated:** 2026-09-10
-> **Owner:** StepFi (`eitighis`) · **Org:** `StepFi-app`
-> **This document is the single canonical source of truth for what StepFi is, what it must become, and the bar every contribution is held to.** Where any other document disagrees with this one, this one wins until amended. Amendments are made by PR to this file, approved by the owner.
+> **Owner:** Lendify (`eitighis`) · **Org:** `Lendify-Onchain-Org`
+> **This document is the single canonical source of truth for what Lendify is, what it must become, and the bar every contribution is held to.** Where any other document disagrees with this one, this one wins until amended. Amendments are made by PR to this file, approved by the owner.
 
 ---
 
@@ -22,7 +22,7 @@ This PRD replaces a scattered, stale, and internally-contradictory set of "found
 
 ### 0.2 Related living documents
 - **`docs/PROGRESSION.md`** — the phased, per-repo execution plan that turns this PRD into the epic/issue backlog seeding structured PRs (built next).
-- **`stepfi-audit-bot/CODING_STANDARDS.md`** — the machine-enforced PR-quality and code-quality rubric (tightened next).
+- **`lendify-audit-bot/CODING_STANDARDS.md`** — the machine-enforced PR-quality and code-quality rubric (tightened next).
 - **`context/architecture-context.md`, `code-standards.md`, `progress-tracker.md`** (per repo) — engineering foundation docs; remain authoritative for *engineering* detail and must not contradict this PRD.
 
 ### 0.3 Reading order for a new contributor
@@ -32,11 +32,11 @@ This PRD replaces a scattered, stale, and internally-contradictory set of "found
 
 ## 1. Vision & mission
 
-**One-liner:** *StepFi is an open-source, Stellar-native Buy-Now-Pay-Later protocol for learners, interns, and early-career developers in emerging markets — built as composable on-chain infrastructure, not a single closed app.*
+**One-liner:** *Lendify is an open-source, Stellar-native Buy-Now-Pay-Later protocol for learners, interns, and early-career developers in emerging markets — built as composable on-chain infrastructure, not a single closed app.*
 
 **Tagline (product):** "Step into your future — pay small small."
 
-**North star (the "tooling system" mandate):** StepFi's on-chain reputation, credit, liquidity, and vendor primitives are built as **reusable, independently-consumable infrastructure**. The learner-BNPL experience is the **flagship application** of that infrastructure — the first, not the only, consumer of it. This is a deliberate positioning decision (see §3.3) that gives the project the surface area to sustain many high-quality open-source contributions rather than the thin issue-supply of a single dApp.
+**North star (the "tooling system" mandate):** Lendify's on-chain reputation, credit, liquidity, and vendor primitives are built as **reusable, independently-consumable infrastructure**. The learner-BNPL experience is the **flagship application** of that infrastructure — the first, not the only, consumer of it. This is a deliberate positioning decision (see §3.3) that gives the project the surface area to sustain many high-quality open-source contributions rather than the thin issue-supply of a single dApp.
 
 **Mission:** Give people with no bank and no credit history a way to finance their own education and tooling, repay in small on-chain installments, and build a portable reputation that other protocols can trust and reuse.
 
@@ -52,7 +52,7 @@ Emerging-market learners, interns, and early-career developers cannot afford the
 
 ## 3. Solution & positioning
 
-### 3.1 What StepFi does
+### 3.1 What Lendify does
 1. A **learner** connects a Stellar wallet, builds an on-chain **reputation score**, and borrows against it to buy approved learning products from whitelisted **vendors**.
 2. **Sponsors** deposit into a **liquidity pool** and earn yield from loan interest (share-price appreciation).
 3. **Mentors** **vouch** for learners, raising their credit limits and staking reputation on the outcome.
@@ -67,7 +67,7 @@ Three dials were considered:
 - **(b) Product + infrastructure** *(ADOPTED as north star)* — ship the BNPL flagship **and** expose the reputation/credit/liquidity/vendor primitives, the indexer, an integration SDK, dashboards, and developer tooling as independently-usable pieces. Lowest-regret: keeps everything already built, and creates real, non-padded work surface.
 - **(c) Full platform pivot** — reposition primarily as generic on-chain credit infrastructure with BNPL as a demo. *Deferred:* higher risk, larger rewrite; can be reached later from (b).
 
-**The existing hook:** `docs/PROJECT_CONTEXT.md` already contains a "Reputation Portability" section ("any dApp can query StepFi reputation", "DAOs can use it for governance weight", "Merchant SDK for easy integration"). (b) formalizes that thread as a first-class product surface.
+**The existing hook:** `docs/PROJECT_CONTEXT.md` already contains a "Reputation Portability" section ("any dApp can query Lendify reputation", "DAOs can use it for governance weight", "Merchant SDK for easy integration"). (b) formalizes that thread as a first-class product surface.
 
 > **Decision needed from owner:** confirm (b), or redirect to (a)/(c). Everything downstream (architecture surface, PROGRESSION backlog size, grant narrative) assumes **(b)**.
 
@@ -81,7 +81,7 @@ Three dials were considered:
 | **Sponsor** (LP) | Deposit into the pool, track position and yield, withdraw | App, Web |
 | **Mentor** | Get verified, vouch for a learner, see the effect on their limit, stake reputation | App, Web |
 | **Vendor** | Register, get approved, receive loan-funded payments for learning products | Web, API |
-| **Integrator / third-party dApp** *(tooling-system persona)* | Query a wallet's StepFi reputation; consume events; integrate credit primitives via SDK | Contracts (read APIs), API, SDK, Docs |
+| **Integrator / third-party dApp** *(tooling-system persona)* | Query a wallet's Lendify reputation; consume events; integrate credit primitives via SDK | Contracts (read APIs), API, SDK, Docs |
 | **Contributor** (OSS dev) | Find a well-specified issue, build to standard, open a PR that passes the gate, get paid via Grantfox | GitHub issues, `CODING_STANDARDS.md`, all repos |
 | **Operator / admin** | Deploy, upgrade (multisig+timelock), tune parameters, monitor health, replay/reconcile | Contracts admin, API admin, monitoring |
 
@@ -95,7 +95,7 @@ Three dials were considered:
 - **App** (React Native/Expo): the flagship mobile learner/sponsor/mentor experience.
 - **Web** (Vite/React): browser experience + protocol dashboards. *(Reconciliation: the Web app is IN scope — it is built and live. The old "mobile-first only, web out-of-scope" line in `project-overview.md` is corrected here.)*
 - **Docs** (Mintlify) + **landing** (Next.js) + **org profile** — public truth surface.
-- **stepfi-audit-bot** — the PR-quality/code-quality enforcement tool (a first-class part of the "tooling system").
+- **lendify-audit-bot** — the PR-quality/code-quality enforcement tool (a first-class part of the "tooling system").
 - **Tooling-system surface:** reputation read-APIs, an integration SDK, event/indexer access, contributor tooling.
 - **Multiple Stellar payment systems** — staged expansion beyond Soroban-SAC (§8).
 - **Gas/resource-fee benchmarking + documentation** per transaction (§9.2).
@@ -103,12 +103,12 @@ Three dials were considered:
 
 ### 5.2 Out of scope (for now)
 - **Mainnet** — gated behind a completed third-party security audit (roadmap Phase "Mainnet & Growth").
-- **Custodial funds / holding user keys** — StepFi is non-custodial by design.
+- **Custodial funds / holding user keys** — Lendify is non-custodial by design.
 - **Fiat on/off-ramp built in-house** — may be delivered *via SEP-24/SEP-31 anchors* (§8) rather than custom; **ratified (§13, 2026-09-10): deferred — evaluated in Phase 4, not yet committed**.
-- Native token / StepFi coin — not planned.
+- Native token / Lendify coin — not planned.
 
 ### 5.3 Contradictions explicitly reconciled by this PRD
-1. **Contract count: SIX, not five.** The `vouching-contract` is implemented (Issue #4) and is a first-class contract; it is currently **undeployed and absent from public overviews**. This PRD treats StepFi as a **6-contract** system and makes vouching deployment a tracked deliverable (§7, §13).
+1. **Contract count: SIX, not five.** The `vouching-contract` is implemented (Issue #4) and is a first-class contract; it is currently **undeployed and absent from public overviews**. This PRD treats Lendify as a **6-contract** system and makes vouching deployment a tracked deliverable (§7, §13).
 2. **Web app is IN scope** (see §5.1).
 3. **Tier/threshold tables** are unified in §7.1; all other copies are derived and must match.
 4. **Stack facts:** API is **NestJS + Fastify** (not "Express"); App is **React Native + Expo**; Web is **Vite + React**. All docs claiming otherwise are wrong and tracked in §14.
@@ -121,16 +121,16 @@ Three dials were considered:
 
 | Repo | Role | Stack | Deploy target | Status |
 |---|---|---|---|---|
-| **StepFi-Contracts** | On-chain truth layer (6 contracts) | Rust / Soroban SDK 22 / wasm32 | Stellar testnet (mainnet later) | ✅ in org |
-| **StepFi-API** | Reads/builds txs, indexes events, auth, admin | NestJS 11 / Fastify / Postgres / Redis / Stellar SDK | Render (live) | ✅ in org |
-| **StepFi-App** | Flagship mobile experience | React Native / Expo SDK 54 | Expo / stores (later) | ✅ in org |
-| **StepFi-Web** | Browser experience + dashboards | Vite / React 19 | **Vercel** (migrating from Netlify) | ✅ in org |
-| **StepFi-Docs** | Product & protocol docs | Mintlify | Vercel/hosted | ✅ in org |
-| **stepfi-landing** | Marketing landing + Grantfox surface | Next.js | Vercel | ▢ planned (not yet in org) |
-| **stepfi-audit-bot** | PR-quality/code-quality gate + stale-issue nudger | Python | Local/host runner | ▢ exists locally; not yet pushed to org |
-| **stepfi-github-profile** | Org profile / link hub | Markdown | GitHub | ▢ planned (not yet in org) |
+| **Lendify-smart_contracts** | On-chain truth layer (6 contracts) | Rust / Soroban SDK 22 / wasm32 | Stellar testnet (mainnet later) | ✅ in org |
+| **Lendify-API** | Reads/builds txs, indexes events, auth, admin | NestJS 11 / Fastify / Postgres / Redis / Stellar SDK | Render (live) | ✅ in org |
+| **Lendify-App** | Flagship mobile experience | React Native / Expo SDK 54 | Expo / stores (later) | ✅ in org |
+| **Lendify-Web** | Browser experience + dashboards | Vite / React 19 | **Vercel** (migrating from Netlify) | ✅ in org |
+| **Lendify-Docs** | Product & protocol docs | Mintlify | Vercel/hosted | ✅ in org |
+| **lendify-landing** | Marketing landing + Grantfox surface | Next.js | Vercel | ▢ planned (not yet in org) |
+| **lendify-audit-bot** | PR-quality/code-quality gate + stale-issue nudger | Python | Local/host runner | ▢ exists locally; not yet pushed to org |
+| **lendify-github-profile** | Org profile / link hub | Markdown | GitHub | ▢ planned (not yet in org) |
 
-> **Repo reality (2026-09-10):** the org `StepFi-app` currently holds **five code/docs repos + `.github`** (the five marked ✅). `stepfi-landing`, `stepfi-audit-bot`, and `stepfi-github-profile` are planned surfaces that are **not yet pushed to the org**; creating/pushing them is tracked work (audit-bot → `ORG-E1.2`; landing → `DEP-E6.1`; profile → `ORG-E0.1`/docs). Tooling that enumerates repos (e.g. the audit bot's `GITHUB_REPOS`) must list only repos that exist, or it will error polling the missing ones.
+> **Repo reality (2026-09-10):** the org `Lendify-Onchain-Org` currently holds **five code/docs repos + `.github`** (the five marked ✅). `lendify-landing`, `lendify-audit-bot`, and `lendify-github-profile` are planned surfaces that are **not yet pushed to the org**; creating/pushing them is tracked work (audit-bot → `ORG-E1.2`; landing → `DEP-E6.1`; profile → `ORG-E0.1`/docs). Tooling that enumerates repos (e.g. the audit bot's `GITHUB_REPOS`) must list only repos that exist, or it will error polling the missing ones.
 
 ### 6.2 Composition
 
@@ -158,14 +158,14 @@ Three dials were considered:
                                          │ events            │ read/build tx
                                          │                   │
                                    ┌─────┴───────────────────▼─────┐
-                                   │        StepFi-API (Render)     │
+                                   │        Lendify-API (Render)     │
                                    │  indexer · tx-build · auth ·   │
                                    │  admin · reconciler · health · │
                                    │  reputation read-API (tooling) │
                                    └─────┬───────────────────┬──────┘
                                          │                   │
                               ┌──────────▼─────┐    ┌────────▼────────┐   ┌──────────────┐
-                              │  StepFi-App    │    │   StepFi-Web    │   │  Integrators │
+                              │  Lendify-App    │    │   Lendify-Web    │   │  Integrators │
                               │  (flagship)    │    │  + dashboards   │   │  / SDK (tool)│
                               └────────────────┘    └─────────────────┘   └──────────────┘
 ```
@@ -227,7 +227,7 @@ Docs commit to **USDC**; the contract tracker still lists "XLM vs USDC?" as open
 
 ## 8. Stellar payment systems (current + expansion)
 
-The grant requirement is *"incorporate multiple Stellar payment systems."* Today StepFi is **Soroban-invoke + custom auth only**. This is the committed staged plan to satisfy the requirement honestly.
+The grant requirement is *"incorporate multiple Stellar payment systems."* Today Lendify is **Soroban-invoke + custom auth only**. This is the committed staged plan to satisfy the requirement honestly.
 
 | Rail | Status today | Plan |
 |---|---|---|
@@ -308,7 +308,7 @@ Each rail becomes one or more epics in `PROGRESSION.md` with the full IndigoPay 
 
 ## 11. Funding model & the PR pipeline
 
-**How StepFi gets paid:** Grantfox is a **per-merged-PR bounty** program, not a milestone contract (campaign 1: "59 PRs merged, 26 contributors"; campaign 2 open). Rewards flow when **quality PRs merge**. Therefore:
+**How Lendify gets paid:** Grantfox is a **per-merged-PR bounty** program, not a milestone contract (campaign 1: "59 PRs merged, 26 contributors"; campaign 2 open). Rewards flow when **quality PRs merge**. Therefore:
 
 > The stall ("3 months, unpaid") maps directly onto: **false-green CI → low-quality/faked PRs → nothing merges cleanly → no rewards.** The fix is not cosmetic — a trustworthy CI plus a strict-but-*passable* PR pipeline that actually lands quality PRs **is the revenue mechanism.**
 
@@ -316,7 +316,7 @@ Each rail becomes one or more epics in `PROGRESSION.md` with the full IndigoPay 
 1. **Well-specified epics/issues** (IndigoPay #1098 shape): Objective → Problem (with evidence) → Scope → Implementation → Acceptance Criteria → Testing.
 2. **Contributor builds to `CODING_STANDARDS.md`.**
 3. **PR must match the IndigoPay #1211 shape** (exec summary → file-by-file audit vs the issue → design + typed errors → verification with exact CI commands + test matrix).
-4. **stepfi-audit-bot** audits every PR against the linked issue + standards; posts APPROVE / REQUEST_CHANGES + a Telegram verdict; nags stale assignees. Its scrutiny is tightened (next deliverable) to enforce PR *structure* and *code quality*, and extended beyond API+Contracts to all repos.
+4. **lendify-audit-bot** audits every PR against the linked issue + standards; posts APPROVE / REQUEST_CHANGES + a Telegram verdict; nags stale assignees. Its scrutiny is tightened (next deliverable) to enforce PR *structure* and *code quality*, and extended beyond API+Contracts to all repos.
 5. **CI must be green for real.** Merge only on green + bot-approve + human review.
 
 **Target throughput:** 200–400 merged, gate-passing PRs collectively per campaign across all repos — sustainable because the tooling-system surface (§3.3) supplies genuine, non-padded work.
@@ -382,8 +382,8 @@ Detailed, per-repo, issue-level execution lives in **`docs/PROGRESSION.md`** (bu
 - **Guarantee** — collateral/guarantee amount held against a loan; consumed on default before loss socialization.
 - **Loss socialization** — reducing LP share price to absorb an unrecovered default.
 - **The gate** — the combination of CI-green + bot-approve + human review that a PR must pass to merge (and thus to be paid).
-- **Tooling surface** — the reusable primitives (reputation read-API, SDK, indexer/events, dashboards) that make StepFi a system, not a single dApp.
+- **Tooling surface** — the reusable primitives (reputation read-API, SDK, indexer/events, dashboards) that make Lendify a system, not a single dApp.
 
 ---
 
-*End of PRD v1.0 (draft for ratification). Next: `docs/PROGRESSION.md` (per-repo execution → PR backlog) and the tightened `stepfi-audit-bot/CODING_STANDARDS.md`.*
+*End of PRD v1.0 (draft for ratification). Next: `docs/PROGRESSION.md` (per-repo execution → PR backlog) and the tightened `lendify-audit-bot/CODING_STANDARDS.md`.*

@@ -6,7 +6,7 @@ labels: 'enhancement'
 assignees: ''
 ---
 
-> 📚 **Documentation**: See [docs/](https://github.com/StepFi-app/StepFi-Contracts/tree/main/docs) for project context and standards
+> 📚 **Documentation**: See [docs/](https://github.com/Lendify-Onchain-Org/Lendify-smart_contracts/tree/main/docs) for project context and standards
 
 ## 🔖 Feature Title
 <!-- Brief and clear. What functionality are you proposing? -->

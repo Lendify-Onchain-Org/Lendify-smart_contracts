@@ -1,4 +1,4 @@
-# Setup Completo - StepFi Contracts
+# Setup Completo - Lendify Contracts
 
 Este archivo documenta la configuración completada el 13 de febrero de 2026.
 

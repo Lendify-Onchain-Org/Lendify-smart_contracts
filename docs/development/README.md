@@ -1,6 +1,6 @@
 # Development Documentation
 
-Guides and workflows for developing StepFi smart contracts.
+Guides and workflows for developing Lendify smart contracts.
 
 ## Contents
 
@@ -13,8 +13,8 @@ Guides and workflows for developing StepFi smart contracts.
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/StepFi-Contracts.git
-cd StepFi-Contracts
+git clone https://github.com/yourusername/Lendify-smart_contracts.git
+cd Lendify-smart_contracts
 
 # Install dependencies
 rustup target add wasm32-unknown-unknown

@@ -1,6 +1,6 @@
 # Storage Patterns
 
-Storage strategies and patterns for Soroban smart contracts in StepFi.
+Storage strategies and patterns for Soroban smart contracts in Lendify.
 
 ## Soroban Storage Types
 
@@ -28,7 +28,7 @@ env.storage().instance().set(&DataKey::Admin, &admin_address);
 let admin: Address = env.storage().instance().get(&DataKey::Admin).unwrap();
 ```
 
-**StepFi Usage**:
+**Lendify Usage**:
 - Reputation: Admin address
 - CreditLine: Configuration parameters
 - Merchant Registry: Admin address
@@ -63,7 +63,7 @@ let score: u32 = env.storage().persistent()
 env.storage().persistent().extend_ttl(&DataKey::Score(user), 100_000, 100_000);
 ```
 
-**StepFi Usage**:
+**Lendify Usage**:
 - Reputation: User scores (critical, long-term)
 - CreditLine: Active loans
 - Liquidity Pool: LP shares and deposits
@@ -97,7 +97,7 @@ let rate: u32 = env.storage().temporary()
 env.storage().temporary().extend_ttl(&DataKey::CachedRate, 50_000, 50_000);
 ```
 
-**StepFi Usage**:
+**Lendify Usage**:
 - CreditLine: Cached interest rates
 - Merchant Registry: Temporary merchant status lookups
 
@@ -137,7 +137,7 @@ pub enum DataKey {
 }
 ```
 
-## StepFi Storage Design
+## Lendify Storage Design
 
 ### Reputation Contract
 

@@ -1,6 +1,6 @@
 # Architecture Documentation
 
-Technical architecture and design documentation for StepFi smart contracts.
+Technical architecture and design documentation for Lendify smart contracts.
 
 ## Contents
 

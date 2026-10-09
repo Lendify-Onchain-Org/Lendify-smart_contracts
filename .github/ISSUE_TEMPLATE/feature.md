@@ -1,6 +1,6 @@
 ---
 name: Feature or fix
-about: Submit a contribution to StepFi-Contracts
+about: Submit a contribution to Lendify-Contracts
 title: ''
 labels: ''
 assignees: ''

@@ -63,7 +63,7 @@ jobs:
             target/wasm32-unknown-unknown/release/vendor_registry_contract.wasm \
             target/wasm32-unknown-unknown/release/liquidity_pool_contract.wasm \
             target/wasm32-unknown-unknown/release/creditline_contract.wasm \
-            --title "StepFi Contracts ${{ github.ref_name }}" \
-            --notes "StepFi Protocol smart contracts compiled from source. See VERIFICATION.md for hash verification instructions."
+            --title "Lendify Contracts ${{ github.ref_name }}" \
+            --notes "Lendify Protocol smart contracts compiled from source. See VERIFICATION.md for hash verification instructions."
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

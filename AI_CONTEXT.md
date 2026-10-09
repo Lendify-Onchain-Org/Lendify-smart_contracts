@@ -1,10 +1,10 @@
-# AI Context - StepFi Contracts
+# AI Context - Lendify Contracts
 
-> **For AI Assistants**: This file provides quick context for working on StepFi-Contracts
+> **For AI Assistants**: This file provides quick context for working on Lendify-smart_contracts
 
 ## Quick Overview
 
-StepFi is a decentralized BNPL (Buy Now, Pay Later) platform on Stellar blockchain. Users pay 20% guarantee, get 80% credit from liquidity pool. On-chain reputation adjusts based on repayment behavior.
+Lendify is a decentralized BNPL (Buy Now, Pay Later) platform on Stellar blockchain. Users pay 20% guarantee, get 80% credit from liquidity pool. On-chain reputation adjusts based on repayment behavior.
 
 ## Essential Documentation
 

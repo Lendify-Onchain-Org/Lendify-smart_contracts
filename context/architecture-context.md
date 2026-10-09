@@ -1,8 +1,8 @@
-# Architecture Context — StepFi-Contracts
+# Architecture Context — Lendify-smart_contracts
 
-## Role In The StepFi Ecosystem
+## Role In The Lendify Ecosystem
 
-StepFi-Contracts is the on-chain truth layer. Every financial operation in StepFi — loan creation, repayment, reputation scoring, liquidity deposits — is ultimately governed by these contracts. The API reads and builds transactions against them. The App signs and submits those transactions. The contracts are the only layer that cannot be patched with a hotfix — they require an upgrade deployment.
+Lendify-smart_contracts is the on-chain truth layer. Every financial operation in Lendify — loan creation, repayment, reputation scoring, liquidity deposits — is ultimately governed by these contracts. The API reads and builds transactions against them. The App signs and submits those transactions. The contracts are the only layer that cannot be patched with a hotfix — they require an upgrade deployment.
 
 ---
 
@@ -225,7 +225,7 @@ pub fn set_admin(env: Env, new_admin: Address)
 ```bash
 chmod +x scripts/deploy-testnet.sh
 ./scripts/deploy-testnet.sh
-# Outputs contract IDs → add to StepFi-API .env
+# Outputs contract IDs → add to Lendify-API .env
 ```
 
 ### Mainnet (Phase 10 — not yet)

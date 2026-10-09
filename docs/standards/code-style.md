@@ -1,6 +1,6 @@
 # Code Style Guide
 
-Rust code style and conventions for StepFi smart contracts.
+Rust code style and conventions for Lendify smart contracts.
 
 ## Formatting
 

@@ -1,4 +1,4 @@
-# Progress Tracker — StepFi-Contracts
+# Progress Tracker — Lendify-smart_contracts
 
 Update this file after every completed contract change, fix, or architectural decision. Progress state must reflect the actual deployed and tested state — not the intended state.
 
@@ -127,7 +127,7 @@ Update this file after every completed contract change, fix, or architectural de
 - Script outputs contract IDs and saves to `.env.contracts`
 
 ### Documentation
-- `README.md` fully rewritten as StepFi-Contracts 
+- `README.md` fully rewritten as Lendify-smart_contracts 
 
 ### LoanType + Per-Installment Tracking (creditline-contract)
 - Added `LoanType` enum (`Standard`, `LearnerInstallment`) to `types.rs`
@@ -276,7 +276,7 @@ Update this file after every completed contract change, fix, or architectural de
 
 1. **Learner grace period** — Make `grace_period_seconds` per-loan (not just global via parameters)
 2. **Reputation rules** — Update `creditline-contract` to call different reputation adjustments for `LoanType::LearnerInstallment`
-3. **Testnet deployment** ✅ — All 5 contracts deployed and initialized (see Contract Deployment Status below); IDs in StepFi-API env config
+3. **Testnet deployment** ✅ — All 5 contracts deployed and initialized (see Contract Deployment Status below); IDs in Lendify-API env config
 4. **End-to-end validation** — Verify loan lifecycle on testnet via Stellar CLI
 
 ---
@@ -292,7 +292,7 @@ Update this file after every completed contract change, fix, or architectural de
 ## Architecture Decisions
 
 - **6 contracts, not 5** — `vouching-contract` added for mentor-based reputation boosting. `lp-contract` was dead code, removed. `liquidity-pool-contract` is the canonical LP implementation.
-- **Vendor over Merchant** — Renamed to reflect StepFi's learning-focused domain.
+- **Vendor over Merchant** — Renamed to reflect Lendify's learning-focused domain.
 - **TTL approach** — Using 60-day threshold / 120-day extension constants. Off-chain indexer is responsible for bumping TTL on active loan entries.
 - **Upgrade pattern** — All contracts have `upgrade()` gated by admin `require_auth()`. Admin address is set at `initialize()` and transferable via `set_admin()`.
 - **Loan sharding** — 32 shards (`loan_id % 32`) in creditline-contract to distribute persistent storage keys and avoid hot-key contention.
@@ -303,8 +303,8 @@ Update this file after every completed contract change, fix, or architectural de
 ## Contract Deployment Status
 
 All 6 contracts are deployed, initialized, and active on Stellar testnet
-(matches `README.md` and StepFi-Web `VERIFICATION.md`). These are the IDs
-live clients (StepFi-Web `constants/config.ts`) point at:
+(matches `README.md` and Lendify-Web `VERIFICATION.md`). These are the IDs
+live clients (Lendify-Web `constants/config.ts`) point at:
 
 | Contract | Testnet Deployed | Contract ID | Last Deployed |
 |---|---|---|---|
@@ -318,7 +318,7 @@ live clients (StepFi-Web `constants/config.ts`) point at:
 Deployer: `GCOYDYSEHRCFWGXUCMPSQ3ODEY2LGMBSVKKCOFH4NRIK4DEEDSETH7BF`
 
 > ✅ Resolved 2026-07-17: The 2026-05-11 set above (deployer `GCOYDYSE...H7BF`,
-> = `stepfi-deployer` on the maintainer machine) is confirmed **live and correct**.
+> = `lendify-deployer` on the maintainer machine) is confirmed **live and correct**.
 > A reproducible `stellar contract build` of current `main` (multi-sig admin
 > included, commit `44a8c00`) produces bytecode whose SHA256 hashes match the
 > on-chain wasm of all five contracts above exactly — the contracts were created

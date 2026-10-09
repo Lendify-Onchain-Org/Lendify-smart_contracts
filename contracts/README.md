@@ -1,6 +1,6 @@
 # Contracts — Upgrade Flow
 
-This document describes the on-chain upgrade flow supported by StepFi contracts.
+This document describes the on-chain upgrade flow supported by Lendify contracts.
 
 Upgrade overview
 - Contracts expose an `upgrade(env: Env, new_wasm_hash: BytesN<32>)` entrypoint. Only the configured admin may call this function.

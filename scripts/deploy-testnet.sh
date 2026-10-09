@@ -2,7 +2,7 @@
 set -e
 
 echo "=================================================="
-echo "  StepFi Contracts — Testnet Deployment Script"
+echo "  Lendify Contracts — Testnet Deployment Script"
 echo "=================================================="
 
 # Check required tools
@@ -10,7 +10,7 @@ command -v stellar >/dev/null 2>&1 || { echo "Error: stellar CLI not found. Inst
 command -v cargo >/dev/null 2>&1 || { echo "Error: cargo not found. Install Rust first."; exit 1; }
 
 NETWORK="testnet"
-SOURCE="${DEPLOYER_ALIAS:-stepfi-deployer}"
+SOURCE="${DEPLOYER_ALIAS:-lendify-deployer}"
 
 echo ""
 echo "Network: $NETWORK"

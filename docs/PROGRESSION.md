@@ -1,6 +1,6 @@
-# StepFi — Progression Plan
+# Lendify — Progression Plan
 
-> **Companion to [`PRD.md`](./PRD.md).** The PRD says *what StepFi is and must become*; this document says *how we get there, repo by repo, as a strictly-ordered backlog of IndigoPay-grade epics that seed the PRs*.
+> **Companion to [`PRD.md`](./PRD.md).** The PRD says *what Lendify is and must become*; this document says *how we get there, repo by repo, as a strictly-ordered backlog of IndigoPay-grade epics that seed the PRs*.
 > **Status:** Draft v1.0 · **Date:** 2026-09-10 · **Owner:** `eitighis`
 > Every epic here becomes a GitHub issue in the IndigoPay #1098 shape; every PR against it must meet the #1211 shape and pass **the gate** (CI-green-for-real + bot-approve + human review). This is the document "everything going on" is measured against.
 
@@ -132,7 +132,7 @@ Builds for real · full tests pass in bounded time · ≥80% coverage on touched
 
 | Epic | Repo | Objective | Size |
 |---|---|---|---|
-| `TOOL-E5.1` | API+Contracts | Public **reputation read-API** (query any wallet's StepFi reputation) + docs | M |
+| `TOOL-E5.1` | API+Contracts | Public **reputation read-API** (query any wallet's Lendify reputation) + docs | M |
 | `TOOL-E5.2` | new SDK repo | **Integration SDK** (TS) wrapping reputation/credit/events for third parties | L |
 | `TOOL-E5.3` | API | Public **event/indexer access** (webhooks or stream) with signed delivery | L |
 | `TOOL-E5.4` | Web | Protocol **dashboards** (pool health, loan book, reputation distribution) | L |
@@ -224,4 +224,4 @@ The point isn't to hit a number — it's that a **6-repo tooling system with rea
 - Live status is maintained in each repo's `context/progress-tracker.md` (kept honest — reflects deployed/tested state, not intended state) and rolled up here per phase.
 - An epic is "done" only when its issue is closed by a merged PR that passed **the gate** and its acceptance criteria are demonstrably met.
 
-*End of Progression Plan v1.0 (draft). Next: tightened `stepfi-audit-bot/CODING_STANDARDS.md` + epic/PR templates that mechanically enforce §2.*
+*End of Progression Plan v1.0 (draft). Next: tightened `lendify-audit-bot/CODING_STANDARDS.md` + epic/PR templates that mechanically enforce §2.*

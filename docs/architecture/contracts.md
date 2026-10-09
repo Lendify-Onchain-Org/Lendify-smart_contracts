@@ -1,6 +1,6 @@
 # Contract Architecture Details
 
-Detailed architecture for each smart contract in the StepFi system.
+Detailed architecture for each smart contract in the Lendify system.
 
 ## Reputation Contract ✅
 

@@ -1,7 +1,7 @@
 # Contract Verification
 
 This document provides the SHA256 hashes of the deployed Soroban smart contract
-bytecode for the StepFi protocol on Stellar **testnet**. Use these hashes to
+bytecode for the Lendify protocol on Stellar **testnet**. Use these hashes to
 verify that the on-chain bytecode matches the source published in this
 repository.
 
@@ -12,7 +12,7 @@ last verified against the ledger and against a reproducible build of `main` on
 for the full deployment record.
 
 > ⚠️ A second, unrelated deployment made on 2026-06-23 from an unrecognized key
-> (`GDL63O...Q4LH`) is **not** part of StepFi and its bytecode matches no source
+> (`GDL63O...Q4LH`) is **not** part of Lendify and its bytecode matches no source
 > in this repository. Those contract IDs are recorded as `orphanedDeployment` in
 > `deployed-testnet.json` and must not be used. The IDs below are the only valid
 > ones.
@@ -52,8 +52,8 @@ Compare each hash with the table above.
 ### Method B — reproducible build from source
 
 ```bash
-git clone https://github.com/StepFi-app/StepFi-Contracts.git
-cd StepFi-Contracts
+git clone https://github.com/Lendify-Onchain-Org/Lendify-smart_contracts.git
+cd Lendify-smart_contracts
 stellar contract build
 stellar contract optimize --wasm target/**/release/<contract>.wasm
 sha256sum target/**/release/*.optimized.wasm

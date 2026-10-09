@@ -3,7 +3,7 @@
 ## Repository Structure
 
 ```
-StepFi-Contracts/
+Lendify-smart_contracts/
 ├── .github/
 │   ├── workflows/
 │   │   └── contracts-ci.yml          # CI: build + test on push/PR

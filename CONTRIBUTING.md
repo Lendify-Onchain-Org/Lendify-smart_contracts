@@ -1,4 +1,4 @@
-# Contributing to StepFi-Contracts
+# Contributing to Lendify-smart_contracts
 
 This repo contains Soroban smart contracts
 written in Rust. Nothing else belongs here.
@@ -18,7 +18,7 @@ written in Rust. Nothing else belongs here.
 - HTML files
 
 If you are building a web dashboard or UI feature,
-open your PR against StepFi-Web instead.
+open your PR against Lendify-Web instead.
 
 ## Before you start
 

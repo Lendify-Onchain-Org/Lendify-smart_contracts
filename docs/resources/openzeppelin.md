@@ -91,11 +91,11 @@ npm install @openzeppelin/wizard-stellar
 npx @openzeppelin/wizard-stellar
 ```
 
-## Integration with StepFi
+## Integration with Lendify
 
 ### Current Setup
 
-StepFi uses OpenZeppelin libraries for:
+Lendify uses OpenZeppelin libraries for:
 - Security patterns
 - Access control (admin, updaters)
 - Safe arithmetic operations

@@ -134,9 +134,9 @@ Can you show me my Stellar MCP capabilities?
 
 Claude should be able to list available Stellar operations.
 
-## StepFi Configuration
+## Lendify Configuration
 
-For StepFi development, we provide a pre-configured file:
+For Lendify development, we provide a pre-configured file:
 
 **File**: `/claude_desktop_config.json` (project root)
 
@@ -292,12 +292,12 @@ npx @mseep/stellar-mcp test-connection
 2. ✅ Configure Claude Desktop
 3. ✅ Test connection
 4. Try generating contracts with OpenZeppelin wizard
-5. Convert StepFi contracts to MCP servers
+5. Convert Lendify contracts to MCP servers
 6. Build natural language interfaces for your dApp
 
 ## Future Possibilities
 
-- **Custom MCP for StepFi**: Convert reputation/creditline contracts to MCP
+- **Custom MCP for Lendify**: Convert reputation/creditline contracts to MCP
 - **Natural Language Testing**: Test contracts with conversational commands
 - **Automated Audits**: Use Claude + MCP for security analysis
 - **Documentation Generation**: Auto-generate docs from contract specs

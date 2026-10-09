@@ -1,35 +1,35 @@
 <div align="center">
 
-# StepFi-Contracts
+# Lendify-smart_contracts
 
-**Soroban smart contracts powering StepFi — reputation-based, collateral-light credit on Stellar.**
+**Soroban smart contracts powering Lendify — reputation-based, collateral-light credit on Stellar.**
 
 Credit, reputation, and a shared liquidity pool, enforced on-chain in Rust.
 
-[![Contracts CI](https://github.com/StepFi-app/StepFi-Contracts/actions/workflows/contracts-ci.yml/badge.svg)](https://github.com/StepFi-app/StepFi-Contracts/actions/workflows/contracts-ci.yml)
+[![Contracts CI](https://github.com/Lendify-Onchain-Org/Lendify-smart_contracts/actions/workflows/contracts-ci.yml/badge.svg)](https://github.com/Lendify-Onchain-Org/Lendify-smart_contracts/actions/workflows/contracts-ci.yml)
 [![Rust](https://img.shields.io/badge/Rust-stable-000000?logo=rust&logoColor=white)](https://www.rust-lang.org)
 [![Soroban](https://img.shields.io/badge/Soroban-SDK-7D00FF?logo=stellar&logoColor=white)](https://soroban.stellar.org)
 [![Network](https://img.shields.io/badge/network-testnet-blue.svg)](https://stellar.expert/explorer/testnet)
 [![Tests](https://img.shields.io/badge/tests-420-brightgreen.svg)](#-build--test)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
-[What is StepFi](#-what-is-stepfi) · [Contracts](#-the-contracts) · [How credit works](#-how-credit-works) · [Deployments](#-deployed-on-testnet) · [Build](#-build--test) · [Roadmap](#-roadmap)
+[What is Lendify](#-what-is-lendify) · [Contracts](#-the-contracts) · [How credit works](#-how-credit-works) · [Deployments](#-deployed-on-testnet) · [Build](#-build--test) · [Roadmap](#-roadmap)
 
 </div>
 
 ---
 
-## 📖 What is StepFi?
+## 📖 What is Lendify?
 
-StepFi extends small, uncollateralized loans to learners and interns based on an **on-chain reputation score** rather than assets. Sponsors fund a shared **liquidity pool**; borrowers draw loans sized and priced by their reputation, repay in installments, and grow their score — unlocking larger limits and lower rates. Vendors are paid directly and tracked in a registry. Everything that touches money or trust is enforced by the contracts in this repository.
+Lendify extends small, uncollateralized loans to learners and interns based on an **on-chain reputation score** rather than assets. Sponsors fund a shared **liquidity pool**; borrowers draw loans sized and priced by their reputation, repay in installments, and grow their score — unlocking larger limits and lower rates. Vendors are paid directly and tracked in a registry. Everything that touches money or trust is enforced by the contracts in this repository.
 
 ## 🗺️ Where it fits
 
-This repo is the **settlement and trust layer** of the StepFi protocol. Clients ([StepFi-App](https://github.com/StepFi-app/StepFi-App), [StepFi-Web](https://github.com/StepFi-app/StepFi-Web)) and the [StepFi-API](https://github.com/StepFi-app/StepFi-API) build and submit transactions to these contracts on Stellar.
+This repo is the **settlement and trust layer** of the Lendify protocol. Clients ([Lendify-App](https://github.com/Lendify-Onchain-Org/Lendify-App), [Lendify-Web](https://github.com/Lendify-Onchain-Org/Lendify-Web)) and the [Lendify-API](https://github.com/Lendify-Onchain-Org/Lendify-API) build and submit transactions to these contracts on Stellar.
 
 <div align="center">
 
-<img src="./docs/architecture.svg" alt="StepFi system architecture — StepFi-Contracts highlighted" width="900" />
+<img src="./docs/architecture.svg" alt="Lendify system architecture — Lendify-smart_contracts highlighted" width="900" />
 
 </div>
 
@@ -115,8 +115,8 @@ Each contract exposes a typed `#[contracterror]` enum (e.g. `CreditLineError`, `
 | Stellar CLI | optional, for deployment |
 
 ```bash
-git clone https://github.com/StepFi-app/StepFi-Contracts.git
-cd StepFi-Contracts
+git clone https://github.com/Lendify-Onchain-Org/Lendify-smart_contracts.git
+cd Lendify-smart_contracts
 
 cargo build                                              # build the workspace
 cargo test                                               # run the test suite
@@ -160,15 +160,15 @@ See [ROADMAP.md](ROADMAP.md) for the detailed protocol roadmap.
 
 This repo holds **Soroban contracts only** — changes belong in [`contracts/`](contracts) (or [`scripts/`](scripts)). Keep `cargo build`, `cargo test`, `fmt`, and `clippy` green, and add tests for every new function. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## 🌐 The StepFi protocol
+## 🌐 The Lendify protocol
 
 | Repo | Role |
 |------|------|
-| **StepFi-Contracts** (this repo) | Soroban smart contracts — credit, reputation, liquidity |
-| [StepFi-App](https://github.com/StepFi-app/StepFi-App) | Learner mobile client (Expo / React Native) |
-| [StepFi-API](https://github.com/StepFi-app/StepFi-API) | Backend: auth/JWT, orchestration, jobs |
-| [StepFi-Web](https://github.com/StepFi-app/StepFi-Web) | Marketing site & web dashboard |
-| [StepFi-Docs](https://github.com/StepFi-app/StepFi-Docs) | Protocol documentation |
+| **Lendify-smart_contracts** (this repo) | Soroban smart contracts — credit, reputation, liquidity |
+| [Lendify-App](https://github.com/Lendify-Onchain-Org/Lendify-App) | Learner mobile client (Expo / React Native) |
+| [Lendify-API](https://github.com/Lendify-Onchain-Org/Lendify-API) | Backend: auth/JWT, orchestration, jobs |
+| [Lendify-Web](https://github.com/Lendify-Onchain-Org/Lendify-Web) | Marketing site & web dashboard |
+| [Lendify-Docs](https://github.com/Lendify-Onchain-Org/Lendify-Docs) | Protocol documentation |
 
 ## 🏅 Contributors
 
