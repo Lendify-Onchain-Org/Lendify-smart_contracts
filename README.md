@@ -10,61 +10,39 @@ Credit, reputation, and a shared liquidity pool, enforced on-chain in Rust.
 [![Rust](https://img.shields.io/badge/Rust-stable-000000?logo=rust&logoColor=white)](https://www.rust-lang.org)
 [![Soroban](https://img.shields.io/badge/Soroban-SDK-7D00FF?logo=stellar&logoColor=white)](https://soroban.stellar.org)
 [![Network](https://img.shields.io/badge/network-testnet-blue.svg)](https://stellar.expert/explorer/testnet)
-[![Tests](https://img.shields.io/badge/tests-420-brightgreen.svg)](#-build--test)
+[![Tests](https://img.shields.io/badge/tests-420-brightgreen.svg)](#-running-tests)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
-[What is Lendify](#-what-is-lendify) · [Contracts](#-the-contracts) · [How credit works](#-how-credit-works) · [Deployments](#-deployed-on-testnet) · [Build](#-build--test) · [Roadmap](#-roadmap)
+[Project Overview](#project-overview) · [Setup Instructions](#setup-instructions) · [Deployed Contracts](#deployed-contracts) · [Ecosystem Architecture](#ecosystem-architecture)
 
 </div>
 
 ---
 
-## 📖 What is Lendify?
+## Project Overview
 
-Lendify extends small, uncollateralized loans to learners and interns based on an **on-chain reputation score** rather than assets. Sponsors fund a shared **liquidity pool**; borrowers draw loans sized and priced by their reputation, repay in installments, and grow their score — unlocking larger limits and lower rates. Vendors are paid directly and tracked in a registry. Everything that touches money or trust is enforced by the contracts in this repository.
+This repository acts as the **settlement and trust layer** of the Lendify protocol. It contains all Soroban smart contracts governing the issuance of credit, repayment logic, reputation scoring, and liquidity pool management.
 
-## 🗺️ Where it fits
+### The Contracts
 
-This repo is the **settlement and trust layer** of the Lendify protocol. Clients ([Lendify-App](https://github.com/Lendify-Onchain-Org/Lendify-App), [Lendify-Web](https://github.com/Lendify-Onchain-Org/Lendify-Web)) and the [Lendify-API](https://github.com/Lendify-Onchain-Org/Lendify-API) build and submit transactions to these contracts on Stellar.
+- **CreditLine**: Orchestrates the loan lifecycle (creation, guarantee, funding, repayment, default) between the user, merchant, and liquidity pool.
+- **Liquidity Pool**: Holds pooled capital from sponsors. Shares are minted on deposit; interest stays in the pool, increasing share value over time.
+- **Reputation**: Tracks on-chain user scores. High scores unlock larger loan limits; defaults penalize scores.
+- **Vendor Registry**: Whitelist of active merchants authorized to receive direct loan funding.
+- **Parameters**: Multisig-controlled registry for global protocol settings (base interest, max loan limits, fees, score thresholds).
+- **Vouching (WIP)**: Enables high-reputation users (mentors) to cryptographically stake their reputation on new learners.
 
-<div align="center">
+### How credit works
 
-<img src="./docs/architecture.svg" alt="Lendify system architecture — Lendify-smart_contracts highlighted" width="900" />
-
-</div>
-
-## 🧩 The contracts
-
-A 6-crate Cargo workspace under [`contracts/`](contracts):
-
-| Contract | Responsibility | Status |
-|----------|----------------|--------|
-| **Creditline** | Loan lifecycle — request, approve, fund, repay (per-installment), late fees, grace period, default, cancel | ✅ deployed |
-| **Reputation** | 0–100 score, boosts, updater-gated writes; drives limits & APR | ✅ deployed |
-| **Liquidity Pool** | Sponsor deposits, share pricing, loan funding, repayment/interest distribution, loss absorption, outflow & merchant-exposure caps | ✅ deployed |
-| **Vendor Registry** | Vendor lifecycle (register → approve → suspend/deactivate) and active-status checks | ✅ deployed |
-| **Parameters** | On-chain governance — protocol parameters + multisig proposal/approval/execution | ✅ deployed |
-| **Vouching** | Mentor vouches that boost reputation, with on-chain expiry | 🚧 pending deployment |
-
-## 💳 How credit works
-
-A borrower's **reputation score (0–100)** determines both their credit limit and interest rate. The mapping is enforced in the Creditline contract:
-
-| Score | APR | Credit limit |
-|------:|----:|-------------:|
-| 90–100 | 4% | 10,000 |
-| 75–89 | 6% | 5,000 |
-| 60–74 | 8% | 2,500 |
-| below 60 | 10% | 1,000 |
-
-- A minimum score (default **50**) is required to open a loan.
-- Loans require a **guarantee** (default 20% of principal) and repay in installments; paying on time raises the score, defaulting applies a penalty.
+- **No generic withdrawals**: When a loan is funded, XLM is sent **directly to the Vendor** (via the Vendor Registry), never to the borrower.
+- **Collateral-light**: Borrowers deposit a `20%` guarantee up front. The liquidity pool provides the remaining `80%`.
+- **Reputation-gated**: A borrower must have a score >= `MIN_SCORE` to open a loan. The loan size is capped by their current score bracket (e.g., `max_loan = score * multiplier`).
 - **Late fees** accrue per overdue installment; an optional grace period is governable.
 - These brackets are compile-time constants; the penalty/threshold/fee parameters and an optional base interest rate are adjustable through the **Parameters** contract's multisig governance.
 
-## 🔗 How the contracts interact
+### How the contracts interact
 
-```
+```text
 Sponsor ──deposit──▶ Liquidity Pool ──fund_loan──▶ Creditline ──pay──▶ Vendor
                                     ◀─repayment──┘
 Creditline ──reads/updates──▶ Reputation   (score → limit & APR)
@@ -75,7 +53,87 @@ Vouching ──boosts───────────▶ Reputation
 
 Creditline propagates reputation-call failures so loan state and reputation never diverge; the Liquidity Pool caps per-transaction outflow and per-merchant exposure.
 
-## 🚀 Deployed on testnet
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+| Tool | Notes |
+|------|-------|
+| Rust (stable) | via [rustup](https://rustup.rs) |
+| `wasm32-unknown-unknown` | `rustup target add wasm32-unknown-unknown` |
+| Stellar CLI | optional, for deployment |
+
+### Quick Start
+
+Get up and running locally:
+
+```bash
+git clone https://github.com/Lendify-Onchain-Org/Lendify-smart_contracts.git
+cd Lendify-smart_contracts
+
+# Build the workspace
+cargo build
+
+# Formatting gate
+cargo fmt --all -- --check
+
+# Lint gate
+cargo clippy --workspace --all-targets -- -D warnings
+```
+
+A [`Makefile`](Makefile) provides shortcuts, and [`scripts/deploy-testnet.sh`](scripts/deploy-testnet.sh) deploys and initializes the full set to testnet.
+
+### Running Tests
+
+Our test suite is extensive and mandatory for any PR:
+
+```bash
+# Run the test suite
+cargo test
+```
+
+| Crate | Tests |
+|-------|------:|
+| Creditline | 148 |
+| Liquidity Pool | 125 |
+| Reputation | 60 |
+| Parameters | 34 |
+| Vouching | 27 |
+| Vendor Registry | 26 |
+| **Total** | **420** |
+
+---
+
+## Security & Governance
+
+- **`require_auth()`** guards every mutating entry point; **reentrancy guards** across contracts.
+- **Timelocked WASM upgrades** — propose → wait `upgrade_delay` → execute, with hash matching and version overflow checks.
+- **Multisig governance** (Parameters) hardened against stale approvals, duplicate signatures, and admin bypass.
+- **Emergency pause/unpause** on Creditline and Liquidity Pool.
+- **Economic safeguards** — first-depositor share-price inflation mitigation, outflow & merchant-exposure caps, guarantee handling on cancel/default.
+- `overflow-checks = true` and `panic = "abort"` in release; `cargo fmt` + `clippy -D warnings` enforced in CI.
+
+Each contract exposes a typed `#[contracterror]` enum (e.g. `CreditLineError`, `LiquidityPoolError`, `ParametersError`) for precise, non-panicking failure codes. See [VERIFICATION.md](VERIFICATION.md) for build/verification details.
+
+---
+
+## Ecosystem Architecture
+
+Lendify is split across multiple repositories that together form one unified protocol.
+
+| Repo | Role |
+|------|------|
+| **[Lendify-smart_contracts](https://github.com/Lendify-Onchain-Org/Lendify-smart_contracts)** | **This repo. Soroban smart contracts — credit, reputation, liquidity.** |
+| [Lendify-App](https://github.com/Lendify-Onchain-Org/Lendify-App) | Learner mobile client (Expo / React Native) |
+| [Lendify-API](https://github.com/Lendify-Onchain-Org/Lendify-API) | Backend: auth/JWT, orchestration, jobs |
+| [Lendify-Web](https://github.com/Lendify-Onchain-Org/Lendify-Web) | Marketing site & web dashboard |
+| [Lendify-Docs](https://github.com/Lendify-Onchain-Org/Lendify-Docs) | Protocol documentation |
+
+---
+
+## Deployed Contracts
 
 Canonical addresses from [`contracts/deployed-testnet.json`](contracts/deployed-testnet.json) — network **testnet**, deployed 2026-05-11 (Creditline redeployed 2026-05-12), last verified 2026-07-17.
 
@@ -93,84 +151,49 @@ Canonical addresses from [`contracts/deployed-testnet.json`](contracts/deployed-
 
 > ⚠️ An unrelated 2026-06-23 deployment from an unrecognized key is recorded as `orphanedDeployment` / **abandoned — do not use**. Only the addresses above are canonical.
 
-## 🛡️ Security & governance
+---
 
-- **`require_auth()`** guards every mutating entry point; **reentrancy guards** across contracts.
-- **Timelocked WASM upgrades** — propose → wait `upgrade_delay` → execute, with hash matching and version overflow checks.
-- **Multisig governance** (Parameters) hardened against stale approvals, duplicate signatures, and admin bypass.
-- **Emergency pause/unpause** on Creditline and Liquidity Pool.
-- **Economic safeguards** — first-depositor share-price inflation mitigation, outflow & merchant-exposure caps, guarantee handling on cancel/default.
-- `overflow-checks = true` and `panic = "abort"` in release; `cargo fmt` + `clippy -D warnings` enforced in CI.
+## CI/CD Pipeline
 
-Each contract exposes a typed `#[contracterror]` enum (e.g. `CreditLineError`, `LiquidityPoolError`, `ParametersError`) for precise, non-panicking failure codes. See [VERIFICATION.md](VERIFICATION.md) for build/verification details.
+[`contracts-ci.yml`](.github/workflows/contracts-ci.yml) runs on every push/PR: `cargo fmt --check`, builds each dependency WASM, `clippy -D warnings`, workspace build, and `cargo test --locked` — a **required check on `main`**. 
 
-## 🔧 Build & test
+Tagging `v*` triggers [`release.yml`](.github/workflows/release.yml): builds all contract WASMs, emits SHA-256 hashes, and publishes a GitHub Release.
 
-### Prerequisites
+---
 
-| Tool | Notes |
-|------|-------|
-| Rust (stable) | via [rustup](https://rustup.rs) |
-| `wasm32-unknown-unknown` | `rustup target add wasm32-unknown-unknown` |
-| Stellar CLI | optional, for deployment |
+## Helpful Links
 
-```bash
-git clone https://github.com/Lendify-Onchain-Org/Lendify-smart_contracts.git
-cd Lendify-smart_contracts
+### Documentation
+- [Full Protocol Docs](docs/README.md)
+- [Architecture Details](docs/architecture/README.md)
+- [Code Standards](docs/standards/code-style.md)
 
-cargo build                                              # build the workspace
-cargo test                                               # run the test suite
-cargo fmt --all -- --check                               # formatting gate
-cargo clippy --workspace --all-targets -- -D warnings    # lint gate
-```
+### Repository Resources
+- [Verification Guide](VERIFICATION.md)
+- [Development Roadmap](docs/ROADMAP.md)
 
-A [`Makefile`](Makefile) provides shortcuts, and [`scripts/deploy-testnet.sh`](scripts/deploy-testnet.sh) deploys and initializes the full set to testnet.
+---
 
-### Test coverage
+## Contribution Guidelines
 
-| Crate | Tests |
-|-------|------:|
-| Creditline | 148 |
-| Liquidity Pool | 125 |
-| Reputation | 60 |
-| Parameters | 34 |
-| Vouching | 27 |
-| Vendor Registry | 26 |
-| **Total** | **420** |
+This repo holds **Soroban contracts only** — changes belong in [`contracts/`](contracts) (or [`scripts/`](scripts)). Keep `cargo build`, `cargo test`, `fmt`, and `clippy` green, and add tests for every new function. 
 
-## 🔄 CI/CD
+### Getting Started
 
-[`contracts-ci.yml`](.github/workflows/contracts-ci.yml) runs on every push/PR: `cargo fmt --check`, builds each dependency WASM, `clippy -D warnings`, workspace build, and `cargo test --locked` — a **required check on `main`**. Tagging `v*` triggers [`release.yml`](.github/workflows/release.yml): builds all contract WASMs, emits SHA-256 hashes, and publishes a GitHub Release.
+1. **Read** the [Contribution Guide](CONTRIBUTING.md) before writing any code.
+2. **Fork** the repository and clone it locally.
+3. **Create** a feature branch: `git checkout -b feature/your-feature-name`
+4. **Build** your feature and ensure all tests/linting pass.
+5. **Open a PR** referencing the issue number.
 
-## 🛣️ Roadmap
+### Earn Rewards for Contributions
 
-| Milestone | Status |
-|-----------|--------|
-| Five core contracts deployed to testnet | ✅ |
-| Multisig governance + timelocked upgrades | ✅ |
-| Liquidity-pool economic-attack hardening | ✅ |
-| Per-installment late fees + emergency pause | ✅ |
-| `fmt` + `clippy` CI gate | ✅ |
-| Vouching contract deployment | 🚧 |
-| Security audit & mainnet readiness | 🗺️ |
+Stellar Lendify is live on **Grantfox**, an open-source collaboration hub in the Stellar ecosystem. Every merged PR earns transparent Stellar rewards. No application gate—just build and ship.
 
-See [ROADMAP.md](ROADMAP.md) for the detailed protocol roadmap.
+- **Create a Grantfox Account:** [Join Here](https://contribute.grantfox.xyz/join?ref=EmeditWeb)
+- **Browse Bountied Issues:** [Lendify-Onchain-Org on Grantfox](https://contribute.grantfox.xyz/org/Lendify-Onchain-Org)
 
-## 🤝 Contributing
-
-This repo holds **Soroban contracts only** — changes belong in [`contracts/`](contracts) (or [`scripts/`](scripts)). Keep `cargo build`, `cargo test`, `fmt`, and `clippy` green, and add tests for every new function. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## 🌐 The Lendify protocol
-
-| Repo | Role |
-|------|------|
-| **Lendify-smart_contracts** (this repo) | Soroban smart contracts — credit, reputation, liquidity |
-| [Lendify-App](https://github.com/Lendify-Onchain-Org/Lendify-App) | Learner mobile client (Expo / React Native) |
-| [Lendify-API](https://github.com/Lendify-Onchain-Org/Lendify-API) | Backend: auth/JWT, orchestration, jobs |
-| [Lendify-Web](https://github.com/Lendify-Onchain-Org/Lendify-Web) | Marketing site & web dashboard |
-| [Lendify-Docs](https://github.com/Lendify-Onchain-Org/Lendify-Docs) | Protocol documentation |
-
-## 🏅 Contributors
+---
 
 <!-- LEADERBOARD_START -->
 ## 🏆 Top 5 Contributors
@@ -226,9 +249,14 @@ This repo holds **Soroban contracts only** — changes belong in [`contracts/`](
 
 <!-- LEADERBOARD_END -->
 
-## 📄 License
+---
 
-Released under the [MIT License](./LICENSE).
+## License
 
+This project is licensed under the [MIT License](./LICENSE).
 
+---
 
+<p align="center">
+  Built with 💙 on Stellar
+</p>
